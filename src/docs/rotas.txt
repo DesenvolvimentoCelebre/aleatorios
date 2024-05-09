@@ -12,4 +12,10 @@ cadastrar produto para o estoque - api/stock/send -- parâmetros {
     preco_custo,
 }
 número do pedido - api/order/next
-pedido de venda - api/order/pedido -- parâmetros
+pedido de venda - api/order/pedido -- parâmetros {}
+deletar usuário- api/delete -- parâmetros {
+    id
+}
+update no usuario - api/update -- parâmetros {
+    nome_usuario, senha, id
+}
