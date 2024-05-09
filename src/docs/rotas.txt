@@ -1,0 +1,14 @@
+Login - api/auth/login -- parâmetros {
+    usuario, senha
+}
+Registrar usuário - api/user  -- parâmetros {
+    nome, nome_usuario, cargo, senha
+}
+listar estoque - api/stock/read
+cadastrar produto para o estoque - api/stock/send -- parâmetros {
+    nome,
+    categoria(1 para quantidade, 2 para kg),
+    saldo,
+    preco_custo,
+}
+número do pedido - api/order/next
