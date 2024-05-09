@@ -3,20 +3,16 @@ const pool = require("../database/connection/connection");
 const getStock = async () => {
   const query = `
   SELECT
+    id,
     nome,
-    categoria,
-    codigo_produto,
-    codigo_personalizado,
-    preco_custo,
-    tipo,
-    SUM(quantidade) AS quantidade,
-    img_produto
+    saldo,
+    categoria
   FROM
-    produto
+    estoque
   GROUP BY 
     nome
   ORDER BY 
-    codigo_produto ASC
+    id ASC
   `;
 
   const [results] = await pool.query(query);

@@ -22,7 +22,7 @@ router.get("/read", async (req, res) => {
     } else {
       res.status(500).json({
         success: false,
-        error: ["Erro ao obter estoque. Por favor, contate o administrador."],
+        error: ["Erro ao obter estoque. Por favor, contate o administrador.", err],
       });
     }
   }
