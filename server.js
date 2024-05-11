@@ -10,6 +10,6 @@ app.use('/api', router);
 
 const port = 21066
 
-app.listen(21778, () => {
+app.listen(port, () => {
     console.log(`Servidor rodando na porta ${port}`);
 })
