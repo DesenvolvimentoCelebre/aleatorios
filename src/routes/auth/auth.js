@@ -1,6 +1,7 @@
 // authRoutes.js
 const express = require("express");
 const { authenticateUser } = require("../../services/auth");
+const { errorMiddleware } = require('../system/err');
 
 const authRouter = express.Router();
 
@@ -30,4 +31,5 @@ authRouter.post("/login", async (req, res, next) => {
   }
 });
 
+authRouter.use(errorMiddleware);
 module.exports = authRouter;
