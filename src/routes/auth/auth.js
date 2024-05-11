@@ -27,6 +27,8 @@ authRouter.post("/login", async (req, res, next) => {
 
     } else {
       res.status(500).json({ success: false, errors: ["Erro no Banco de Dados"] });
+      const error = err;
+      next(new Error(`Erro ao fazer login, ${error}`));
     }
   }
 });
