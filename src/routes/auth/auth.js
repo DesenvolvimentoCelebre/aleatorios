@@ -1,7 +1,7 @@
 // authRoutes.js
 const express = require("express");
 const { authenticateUser } = require("../../services/auth");
-const { errorMiddleware } = require('../system/err');
+const { errorMiddleware } = require('../../utils/middleware');
 
 const authRouter = express.Router();
 
