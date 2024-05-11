@@ -4,7 +4,7 @@ const { authenticateUser } = require("../../services/auth");
 
 const authRouter = express.Router();
 
-authRouter.post("/login", async (req, res) => {
+authRouter.post("/login", async (req, res, next) => {
   try {
     const { usuario, senha } = req.body;
     const authResponse = await authenticateUser(usuario, senha);
@@ -20,6 +20,10 @@ authRouter.post("/login", async (req, res) => {
   } catch (err) {
     if (err.message === "Usuário não encontrado" || err.message === "Falha na Autenticação") {
       res.status(401).json({ success: false, errors: [err.message] });
+      
+      const error = err;
+      next(new Error(`Erro ao fazer login, ${error}`));
+
     } else {
       res.status(500).json({ success: false, errors: ["Erro no Banco de Dados"] });
     }
