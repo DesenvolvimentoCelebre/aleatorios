@@ -1,9 +1,11 @@
 const express = require("express");
 const { getStock } = require("../../services/stock");
+const { errorMiddleware } = require('../../utils/middleware');
+
 
 const router = express.Router();
 
-router.get("/read", async (req, res) => {
+router.get("/read", async (req, res, next) => {
   try {
     const stockData = await getStock();
     
@@ -13,6 +15,9 @@ router.get("/read", async (req, res) => {
     });
   } catch (err) {
     console.error("Erro ao obter estoque:", err);
+    
+    const error = err;
+    next(new Error(`Erro ao listar estoque, ${error}`));
 
     if (err.message === "Nenhum item no estoque") {
       res.status(404).json({
@@ -24,11 +29,13 @@ router.get("/read", async (req, res) => {
         success: false,
         error: ["Erro ao obter estoque. Por favor, contate o administrador.", err],
       });
+      const error = err;
+      next(new Error(`Erro ao listar estoque, ${error}`));
     }
   }
 });
 
-router.post("/send", async (req, res) => {
+router.post("/send", async (req, res, next) => {
     try {
       const product = req.body;
   
@@ -59,11 +66,17 @@ router.post("/send", async (req, res) => {
       });
     } catch (err) {
       console.error("Erro ao cadastrar produto:", err);
+      
+      const error = err;
+      next(new Error(`Erro ao cadastar produto, ${error}`));
+
       res.status(500).json({
         success: false,
         error: ["Erro ao cadastrar produto", err.message],
       });
     }
   });
+
+router.use(errorMiddleware);
 
 module.exports = router;
