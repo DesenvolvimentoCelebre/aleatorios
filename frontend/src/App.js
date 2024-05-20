@@ -13,7 +13,6 @@ function App() {
         <Route path="/login" element={<TelaLogin />} />
         <Route path="/home" element={<Home />} />
         <Route path="/cadastro-usuario" element={<CadastroUsuario />} />
-        <Route path="/listar-usuarios" element={<Usuarios />} />
       </Routes>
     </div>
   );

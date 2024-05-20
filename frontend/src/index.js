@@ -25,10 +25,6 @@ const router = createBrowserRouter([
         path: "/cadastro-usuario",
         element: <CadastroUsuario />,
       },
-      {
-        path: "/listar-usuarios",
-        element: <Usuarios />,
-      },
     ],
   },
 ]);
