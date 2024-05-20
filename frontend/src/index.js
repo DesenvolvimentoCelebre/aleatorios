@@ -6,7 +6,6 @@ import App from "./App";
 import TelaLogin from "./rotas/TelaLogin";
 import Home from "./rotas/Home";
 import CadastroUsuario from "./rotas/CadastroUsuario";
-import Usuarios from "./componentes/Usuarios";
 
 const router = createBrowserRouter([
   {
