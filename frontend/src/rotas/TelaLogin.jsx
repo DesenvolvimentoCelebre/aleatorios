@@ -28,7 +28,7 @@ const LogoLogin = styled.img`
     margin-bottom: 40px;
   }
   @media screen and (max-width: 767px) {
-    width: 270px;
+    width: 300px;
     margin-bottom: 40px;
   }
 `;
@@ -46,6 +46,11 @@ const TelaLogin = (props) => {
         <LogoLogin src={logo} alt="Logo da empresa" />
         <Form>
           <CampoTexto
+            widthMobile="300px"
+            heightMobile="30px"
+            widthTablet="500px"
+            heighTablet="40px"
+            size="20px"
             corDoLabel="white"
             label="Usuário"
             type="text"
@@ -54,6 +59,11 @@ const TelaLogin = (props) => {
             valorAlterado={(valor) => setUsuario(valor)}
           />
           <CampoTexto
+            widthMobile="300px"
+            heightMobile="30px"
+            widthTablet="500px"
+            heighTablet="40px"
+            size="20px"
             corDoLabel="white"
             label="Senha"
             type="password"
@@ -61,7 +71,7 @@ const TelaLogin = (props) => {
             value={senha}
             valorAlterado={(valor) => setSenha(valor)}
           />
-          <Botao>Login</Botao>
+          <Botao padding="2px 50px">Login</Botao>
         </Form>
       </ContainerLogin>
     </>

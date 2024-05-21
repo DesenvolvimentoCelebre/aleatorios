@@ -23,17 +23,17 @@ const Label = styled.label`
   }
 `;
 const Input = styled.input`
-  width: ${(props) => props.width || "660px"};
+  width: ${(props) => props.widthDesktop || "660px"};
   border-radius: 30px;
   padding-left: 18px;
   font-size: 30px;
-  @media screen and (min-width: 1024px) {
-    width: ${(props) => props.width || "660px"};
-    height: ${(props) => props.height || "50px"};
-  }
   @media screen and (max-width: 767px) {
-    width: ${(props) => props.width};
-    height: ${(props) => props.height};
+    width: ${(props) => props.widthMobile};
+    height: ${(props) => props.heightMobile};
+  }
+  @media screen and (min-width: 1024px) {
+    width: ${(props) => props.widthTablet};
+    height: ${(props) => props.heightTablet};
   }
 `;
 const CampoTexto = (props) => {
@@ -47,6 +47,10 @@ const CampoTexto = (props) => {
           {props.label}
         </Label>
         <Input
+          widthMobile={props.widthMobile}
+          heightMobile={props.heightMobile}
+          widthTablet={props.widthTablet}
+          heightTablet={props.heightTablet}
           height={props.height}
           width={props.width}
           type={props.type}
