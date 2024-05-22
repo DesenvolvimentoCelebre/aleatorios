@@ -2,7 +2,7 @@ import CampoTexto from "../componentes/CampoTexto";
 import Botao from "../componentes/Botao";
 import { useState } from "react";
 import styled, { createGlobalStyle } from "styled-components";
-import logo from "../img/logo.png";
+import logo from "../img/logo-login.png";
 const GlobalStyle = createGlobalStyle`
   body {
     font-family: 'Josefin Sans', serif;
