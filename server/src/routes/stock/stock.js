@@ -19,7 +19,7 @@ router.get("/read", async (req, res, next) => {
     const error = err;
     next(new Error(`Erro ao listar estoque, ${error}`));
 
-    if (err.message === "Nenhum item no estoque") {
+    if (results.length === 0) {
       res.status(404).json({
         success: true,
         message: ["Você não possui itens no estoque"],

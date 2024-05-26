@@ -16,11 +16,7 @@ const getStock = async () => {
   `;
 
   const [results] = await pool.query(query);
-
-  if (results.length === 0) {
-    throw new Error("Nenhum item no estoque");
-  }
-
+  
   return results;
 };
 
