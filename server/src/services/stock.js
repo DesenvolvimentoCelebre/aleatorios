@@ -1,23 +1,37 @@
 const pool = require("../database/connection/connection");
 
 const getStock = async () => {
-  const query = `
-  SELECT
-    id,
-    nome,
-    saldo,
-    categoria
-  FROM
-    estoque
-  GROUP BY 
-    nome
-  ORDER BY 
-    id ASC
-  `;
-
-  const [results] = await pool.query(query);
+  try {
+    const query = `
+    SELECT
+      id,
+      nome,
+      saldo,
+      categoria
+    FROM
+      estoque
+    GROUP BY 
+      nome
+    ORDER BY 
+      id ASC
+    `;
   
-  return results;
+    const [results] = await pool.query(query);
+    
+    if (results.length === 0) {
+      return ({
+        success: true,
+        message: ['Nenhum produto Cadastrado no estoque']
+      })
+    }
+
+    return results;
+  } catch (error) {
+    return ({
+      success:false,
+      error:['Erro ao listar estoque, por favor entrar em contato com administador']
+    })
+  }
 };
 
 const addProductToStock = async (product) => {
