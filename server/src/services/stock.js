@@ -20,7 +20,6 @@ const getStock = async () => {
     
     if (results.length === 0) {
       return ({
-        success: true,
         message: ['Nenhum produto Cadastrado no estoque']
       })
     }
