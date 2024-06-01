@@ -8,13 +8,9 @@ const authRouter = express.Router();
 authRouter.post("/login", async (req, res, next) => {
   try {
     const { usuario, senha } = req.body;
-    if (!usuario || !senha) {
-      return res.status(400).json({ success: false, errors: ["Campos de usuário ou senha faltando"] });
-    }
-
     const authResponse = await authenticateUser(usuario, senha);
 
-    res.json({
+    res.status(200).json({
       success: true,
       token: authResponse.token,
       expiration: authResponse.expirationDate,
@@ -25,10 +21,15 @@ authRouter.post("/login", async (req, res, next) => {
   } catch (err) {
     if (err.message === "Usuário não encontrado" || err.message === "Falha na Autenticação") {
       res.status(401).json({ success: false, errors: [err.message] });
+      
+      const error = err;
+      next(new Error(`Erro ao fazer login, ${error}`));
+
     } else {
       res.status(500).json({ success: false, errors: ["Erro no Banco de Dados"] });
+      const error = err;
+      next(new Error(`Erro ao fazer login, ${error}`));
     }
-    next(new Error(`Erro ao fazer login: ${err.message}`));
   }
 });
 
