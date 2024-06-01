@@ -10,14 +10,7 @@ authRouter.post("/login", async (req, res, next) => {
     const { usuario, senha } = req.body;
     const authResponse = await authenticateUser(usuario, senha);
 
-    res.status(200).json({
-      success: true,
-      token: authResponse.token,
-      expiration: authResponse.expirationDate,
-      nome: authResponse.nome,
-      cargo: authResponse.cargo,
-      adm: authResponse.adm,
-    });
+    res.status(200).json({ success: true, data: authResponse})
   } catch (err) {
     if (err.message === "Usuário não encontrado" || err.message === "Falha na Autenticação") {
       res.status(401).json({ success: false, errors: [err.message] });
