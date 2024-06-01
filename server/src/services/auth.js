@@ -1,7 +1,10 @@
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const pool = require("../database/connection/connection");
-const { jwtSecret, tokenExpiration } = require("../config/jwt");
+// const { jwtSecret, tokenExpiration } = require("../config/jwt");
+
+const jwtSecret = "token";
+const tokenExpiration = "1h";
 
 const authenticateUser = async (usuario, senha) => {
   const query = `
