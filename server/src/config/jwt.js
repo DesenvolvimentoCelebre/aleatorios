@@ -1,6 +1,9 @@
 const dotenv = require("dotenv").config();
 
+const jwtSecret = process.env.JWT_SECRET
+const tokenExpiration = "1h"
+
 module.exports = {
-  jwtSecret: process.env.JWT_SECRET,
-  tokenExpiration: "1h", // Padrão de tempo para expiração do token
+  jwtSecret,
+  tokenExpiration,
 };
