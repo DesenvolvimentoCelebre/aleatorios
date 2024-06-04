@@ -6,7 +6,7 @@ const pass = require("../../config/passport")
 
 const router = express.Router();
 
-router.use(pass())
+router.use(pass)
 
 router.post("/user", async (req, res, next) => {
   try {
