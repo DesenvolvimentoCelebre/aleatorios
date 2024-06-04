@@ -2,9 +2,11 @@ const express = require("express");
 const passport = require("passport");
 const { createUser, getAllUsers, deleteUser } = require("../../services/user");
 const { errorMiddleware } = require('../../utils/middleware');
-
+const pass = require("../../config/passport")
 
 const router = express.Router();
+
+router.use(pass)
 
 router.post("/user", async (req, res, next) => {
   try {
