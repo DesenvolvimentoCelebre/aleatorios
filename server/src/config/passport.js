@@ -6,13 +6,11 @@ passport.use(
   new JWTStrategy(
     {
       jwtFromRequest: ExtractJWT.fromAuthHeaderAsBearerToken(),
-      secretOrKey: "token", // Replace this with your JWT secret
+      secretOrKey: "token", 
     },
     (jwtPayload, done) => {
-      // Your logic to validate the user based on the JWT payload
-      // For example, you could retrieve the user from the database
       const user = { id: jwtPayload.userId, name: jwtPayload.name };
-      done(null, user); // Call done() with the user object
+      done(null, user); 
     }
   )
 );
