@@ -31,10 +31,7 @@ router.get(
     try {
       const users = await getAllUsers(); 
 
-      res.status(200).json({
-        success: true,
-        data: users,
-      });
+      res.send('Funcionando')
 
 
      } catch (err) {
