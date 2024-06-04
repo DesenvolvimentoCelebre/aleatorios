@@ -16,16 +16,16 @@ router.post('/user', async (req, res) => {
       if (error.message === 'DuplicateUsuario') {
           res.status(400).json({ 
             success: false,
-            error: 'Usuário já existe' });
+            error: 'Usuário já cadastrado' });
       } else if (error.message === 'DuplicateCPF') {
           res.status(400).json({ 
             success: false,
-            error: 'CPF já existe'
+            error: 'CPF já cadastrado'
            });
       } else if (error.message === 'DuplicateNome') {
           res.status(400).json({ 
             success: false,
-            error: 'Nome já existe'
+            error: 'Nome já cadastrado'
            });
       } else {
           res.status(500).json({ 
