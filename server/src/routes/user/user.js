@@ -30,7 +30,8 @@ router.post('/user', async (req, res) => {
       } else {
           res.status(500).json({ 
             success: false,
-            error: 'Erro ao criar usuário'
+            error: 'Erro ao criar usuário',
+            details: error
            });
       }
   }
