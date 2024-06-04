@@ -30,19 +30,14 @@ router.get(
   async (req, res, next) => {
     try {
       const users = await getAllUsers(); 
-      
-      if (users.length === 0) {
-        res.status(404).json({
-          success: true,
-          message: ["Nenhum usuário cadastrado"],
-        });
-      } else {
-        res.status(200).json({
-          success: true,
-          data: users,
-        });
-      }
-    } catch (err) {
+
+      res.status(200).json({
+        success: true,
+        data: users,
+      });
+
+
+     } catch (err) {
       console.error("Erro ao obter usuários:", err);
       const error = err;
       next(new Error(`Erro ao listar usuários, ${error}`));
