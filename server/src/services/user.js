@@ -4,7 +4,7 @@ const pool = require("../database/connection/connection");
 async function createUser(userData) {
   try {
       const result = await pool.query(
-          "INSERT INTO usuario (nome, nome_usuario, cpf, senha, cargo) VALUES (?, ?, ?, ?, ?)",
+          "INSERT INTO usuario (nome, usuario, cpf, senha, cargo) VALUES (?, ?, ?, ?, ?)",
           [userData.nome, userData.nome_usuario, userData.cpf, userData.senha, userData.cargo]
       );
       return result;
