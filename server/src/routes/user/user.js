@@ -7,9 +7,9 @@ const router = express.Router();
 
 router.post("/user", async (req, res, next) => {
   try {
-    const { nome, nome_usuario, senha, cargo } = req.body;
+    const { nome, nome_usuario, cpf, senha, cargo } = req.body;
 
-    await createUser(nome, nome_usuario, senha, cargo);
+    await createUser(nome, nome_usuario, cpf, senha, cargo);
 
     res
       .status(201)

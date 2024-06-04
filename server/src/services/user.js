@@ -1,10 +1,10 @@
 const bcrypt = require("bcrypt");
 const pool = require("../database/connection/connection");
 
-const createUser = async (nome, nome_usuario, senha, cargo) => {
+const createUser = async (nome, nome_usuario, cpf, senha, cargo) => {
   const hashedSenha = await bcrypt.hash(senha, 10); 
-  const query = 'INSERT INTO usuario (nome, usuario, senha, cargo) VALUES (?, ?, ?, ?)'
-  const values = [nome, nome_usuario, hashedSenha, cargo];
+  const query = 'INSERT INTO usuario (nome, usuario, cpf senha, cargo) VALUES (?, ?, ?, ?, ?)'
+  const values = [nome, nome_usuario, cpf, hashedSenha, cargo];
 
   const [results] = await pool.query(query, values);
 
