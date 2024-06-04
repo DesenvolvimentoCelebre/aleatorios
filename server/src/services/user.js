@@ -1,15 +1,28 @@
 const bcrypt = require("bcrypt");
 const pool = require("../database/connection/connection");
 
-const createUser = async (nome, nome_usuario, cpf, senha, cargo) => {
-  const hashedSenha = await bcrypt.hash(senha, 10); 
-  const query = 'INSERT INTO usuario (nome, usuario, cpf, senha, cargo) VALUES (?, ?, ?, ?, ?)'
-  const values = [nome, nome_usuario, cpf, hashedSenha, cargo];
-
-  const [results] = await pool.query(query, values);
-
-  return results;
-};
+async function createUser(userData) {
+  try {
+      const result = await pool.query(
+          "INSERT INTO usuario (nome, usuario, cpf, senha, cargo) VALUES (?, ?, ?, ?, ?)",
+          [userData.nome, userData.usuario, userData.cpf, userData.senha, userData.cargo]
+      );
+      return result;
+  } catch (error) {
+      if (error.code === 'ER_DUP_ENTRY') {
+          if (error.sqlMessage.includes('for key \'usuario\'')) {
+              throw new Error('DuplicateUsuario');
+          }
+          if (error.sqlMessage.includes('for key \'cpf\'')) {
+              throw new Error('DuplicateCPF');
+          }
+          if (error.sqlMessage.includes('for key \'nome\'')) {
+              throw new Error('DuplicateNome');
+          }
+      }
+      throw error;
+  }
+}
 
 const getAllUsers = async () => {
   const query = `SELECT id, nome, usuario AS nome_usuario, cargo, adm FROM usuario`;

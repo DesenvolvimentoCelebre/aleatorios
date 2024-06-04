@@ -5,22 +5,34 @@ const passport = require("../../config/passport")
 
 const router = express.Router();
 
-router.post("/user", async (req, res, next) => {
+router.post('/user', async (req, res) => {
   try {
-    const { nome, nome_usuario, cpf, senha, cargo } = req.body;
-
-    await createUser(nome, nome_usuario, cpf, senha, cargo);
-
-    res
-      .status(201)
-      .json({ success: true, message: "Usuário cadastrado com sucesso" });
-  } catch (err) {
-    console.error("Erro ao criar usuário:", err);
-    const error = err;
-    next(new Error(`Erro ao criar usuario, ${error}`));
-    res
-      .status(500)
-      .json({ success: false, error: ["Erro ao cadastrar usuário"] });
+      await createUser(req.body);
+      res.status(201).json({ 
+        success: true,
+         message: 'Usuário criado com sucesso'
+      });
+  } catch (error) {
+      if (error.message === 'DuplicateUsuario') {
+          res.status(400).json({ 
+            success: false,
+            error: 'Usuário já existe' });
+      } else if (error.message === 'DuplicateCPF') {
+          res.status(400).json({ 
+            success: false,
+            error: 'CPF já existe'
+           });
+      } else if (error.message === 'DuplicateNome') {
+          res.status(400).json({ 
+            success: false,
+            error: 'Nome já existe'
+           });
+      } else {
+          res.status(500).json({ 
+            success: false,
+            error: 'Erro ao criar usuário'
+           });
+      }
   }
 });
 
