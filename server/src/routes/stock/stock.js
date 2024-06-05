@@ -41,11 +41,9 @@ router.post("/send", async (req, res, next) => {
   
       const requiredFields = [
         "nome",
+        "saldo",
         "categoria",
-        "codigo_personalizado",
-        "preco_custo",
-        "tipo",
-        "quantidade",
+        "preco_custo"
       ];
   
       const missingFields = requiredFields.filter((field) => !product[field]);
