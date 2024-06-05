@@ -49,7 +49,7 @@ const addProductToStock = async (product) => {
     preco_custo,
   ];
 
-  const query = `INSERT INTO produto (nome, categoria, saldo, preco_custo,  ) VALUES (?,?,?,?,?,?,?)`;
+  const query = `INSERT INTO produto (nome, categoria, saldo, preco_custo  ) VALUES (?,?,?,?)`;
 
   const [results] = await pool.query(query, values);
 
