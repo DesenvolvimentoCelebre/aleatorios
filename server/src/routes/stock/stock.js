@@ -1,5 +1,5 @@
 const express = require("express");
-const { getStock } = require("../../services/stock");
+const { getStock, addProductToStock } = require("../../services/stock");
 const { errorMiddleware } = require('../../utils/middleware');
 
 
