@@ -14,6 +14,6 @@ const port = 21066;
 app.listen(port, () => {
     console.log(`Servidor rodando na porta ${port}`);
     websocketServer.listen(port + 1, () => {
-        console.log(`WebSocket rodando na porta ${port + 1}`);
+        console.log(`WebSocket rodando na porta ${port + 2}`);
     });
 });
