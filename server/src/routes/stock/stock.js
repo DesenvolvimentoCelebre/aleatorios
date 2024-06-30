@@ -75,6 +75,22 @@ router.post("/send", async (req, res, next) => {
     }
   });
 
+router.put("/attestoque", async (req, res, next) => {
+    try {
+      const { codigo_produto, quantidade, bit } = req.body;
+      const result = await productUpdate({codigo_produto, quantidade, bit});
+      if (result.success) {
+        res.status(201).json({ success: true, message: 'Estoque atualizado com sucesso', details: result});
+      } else {
+        res.status(500).json({ success: false, error: result.error });
+      }
+    } catch (error) {
+      console.error('Erro ao atualizar o estoque:', error);
+      res.status(500).json({ success: false, error: 'Erro interno do servidor' });
+      next(new Error(`Erro ao atualizar estoque, ${error}`))
+    }
+});
+
 router.use(errorMiddleware);
 
 module.exports = router;

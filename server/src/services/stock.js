@@ -57,7 +57,28 @@ const addProductToStock = async (product) => {
   return results;
 };
 
+async function productUpdate({ bit, quantidade, codigo_produto }) {
+  try {
+    let query = 'UPDATE produto SET bit = ?';
+    const values = [bit];
+
+    if (quantidade && quantidade.trim() !== '') { 
+      query += ', quantidade = ?'; 
+      values.push(quantidade);
+    }
+
+    query += ' WHERE codigo_produto = ?';
+    values.push(codigo_produto);
+
+    await pool.query(query, values);
+    return { success: true, message: 'Produto atualizado com sucesso' };
+  } catch (error) {
+    return { success: false, error: ['Erro interno do servidor'] };
+  }
+}
+
 module.exports = {
   getStock,
-  addProductToStock
+  addProductToStock,
+  productUpdate
 };
