@@ -7,7 +7,8 @@ const getStock = async () => {
       id,
       nome,
       saldo,
-      categoria
+      categoria,
+      preco_custo as preco
     FROM
       estoque
     GROUP BY 
