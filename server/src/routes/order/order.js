@@ -25,7 +25,7 @@ router.get("/next", async (req, res, next) => {
 });
 
 router.post("/pedido", async (req, res, next) => {
-  if (!req.body || !req.body.pedido || !req.body.pedido.produtos) {
+  if (!req.body || !req.body.pedido || !req.body.pedido.produtos || !req.body.pedido.produto ) {
     return res.status(400).json({
       success: false,
       error: ["Formato de pedido inválido"],

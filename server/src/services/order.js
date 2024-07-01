@@ -14,24 +14,35 @@ const getNextOrderNumber = async () => {
 
 const createOrder = async (pedido) => {
   const connection = await pool.getConnection(); 
-
   try {
     await connection.beginTransaction(); 
-    for (const produto of pedido.produtos) {
+    for (const pedido of pedido.pedidos) {
       const sql = `
         INSERT INTO pedido (pedido, cpf_cliente, data_venda, garcom, valor) 
         VALUES (?, ?,CURRENT_TIMESTAMP, ?, ?)
       `;
 
       const values = [
-        produto.pedido,
-        produto.cpf_cliente,
-        produto.data_venda,
-        produto.garcom,
-        produto.valor,
+        pedido.pedido,
+        pedido.cpf_cliente,
+        pedido.data_venda,
+        pedido.garcom,
+        pedido.valor,
       ];
 
       await connection.query(sql, values); 
+    }
+
+    for (const produto of pedido.produto) {
+      const sqlpay = `INSERT INTO pedno (pedido, codigo_produto, unino, valor_unit) VALUES (?,?,?,?)`;
+      const values2 = [
+        produto.pedido,
+        produto.codigo_produto,
+        produto.unino,
+        produto.valor_unit
+      ];
+
+      await connection.query(sqlpay, values2);
     }
 
     await connection.commit();
