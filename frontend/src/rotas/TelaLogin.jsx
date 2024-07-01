@@ -1,6 +1,8 @@
-import CampoTexto from "../componentes/CampoTexto";
-import Botao from "../componentes/Botao";
-import { useState } from "react";
+import CampoTexto from "../componentes/CampoTexto.jsx";
+import { useSelector, useDispatch } from "react-redux";
+import { login } from "../slices/authSlice.js";
+import Botao from "../componentes/Botao.jsx";
+import { useEffect, useState } from "react";
 import styled, { createGlobalStyle } from "styled-components";
 import logo from "../img/logo-login.png";
 const GlobalStyle = createGlobalStyle`
@@ -38,13 +40,31 @@ const Form = styled.form``;
 const TelaLogin = (props) => {
   const [usuario, setUsuario] = useState("");
   const [senha, setSenha] = useState("");
+  const dispatch = useDispatch();
+  const { error, loading } = useSelector((state) => state.auth || {});
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    const user = {
+      usuario,
+      senha,
+    };
+    dispatch(login(user));
+  };
+
+  useEffect(() => {
+    if (error) {
+      console.log(error);
+    }
+  }, [error]);
 
   return (
     <>
       <GlobalStyle />
       <ContainerLogin>
         <LogoLogin src={logo} alt="Logo da empresa" />
-        <Form>
+        <Form onSubmit={handleSubmit}>
           <CampoTexto
             widthMobile="300px"
             heightMobile="30px"
@@ -55,7 +75,7 @@ const TelaLogin = (props) => {
             label="Usuário"
             type="text"
             obrigatorio={true}
-            value={usuario}
+            value={usuario || ""}
             valorAlterado={(valor) => setUsuario(valor)}
           />
           <CampoTexto
@@ -68,10 +88,11 @@ const TelaLogin = (props) => {
             label="Senha"
             type="password"
             obrigatorio={true}
-            value={senha}
+            value={senha || ""}
             valorAlterado={(valor) => setSenha(valor)}
           />
-          <Botao padding="2px 50px">Login</Botao>
+          {!loading && <Botao padding="2px 50px">Login</Botao>}
+          {loading && <Botao padding="2px 50px">Aguade...</Botao>}
         </Form>
       </ContainerLogin>
     </>

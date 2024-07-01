@@ -27,6 +27,7 @@ const Input = styled.input`
   border-radius: 30px;
   padding-left: 18px;
   font-size: 30px;
+
   @media screen and (max-width: 767px) {
     width: ${(props) => props.widthMobile};
     height: ${(props) => props.heightMobile};
@@ -57,6 +58,7 @@ const CampoTexto = (props) => {
           required={props.obrigatorio}
           onChange={valorDigitado}
           value={props.valor}
+          disabled={props.disabled}
         />
       </LoginForm>
     </>

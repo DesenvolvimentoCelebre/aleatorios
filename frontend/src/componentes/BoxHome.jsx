@@ -9,6 +9,7 @@ const Box = styled.div`
   flex-direction: column;
   align-items: center;
   padding: 20px;
+  cursor: pointer;
 
   @media screen and (min-width: 1281px) {
     width: 200px;

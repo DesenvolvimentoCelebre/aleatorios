@@ -39,8 +39,8 @@ const Tabela = ({ coluna, dados }) => {
       <tbody>
         {dados.map((row, rowIndex) => (
           <tr key={rowIndex}>
-            {row.map((cell, cellIndex) => (
-              <td key={cellIndex}>{cell}</td>
+            {coluna.map((col, colIndex) => (
+              <td key={colIndex}>{row[col]}</td>
             ))}
           </tr>
         ))}

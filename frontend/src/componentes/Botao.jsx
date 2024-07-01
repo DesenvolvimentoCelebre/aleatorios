@@ -29,7 +29,11 @@ const Button = styled.button`
 `;
 const Botao = (props) => {
   return (
-    <Button padding={props.padding} fontSize={props.fontSize}>
+    <Button
+      onClick={props.onClick}
+      padding={props.padding}
+      fontSize={props.fontSize}
+    >
       {props.children}
     </Button>
   );

@@ -1,9 +1,11 @@
 import React from "react";
-import Background from "../componentes/Background";
+import Background from "../componentes/Background.jsx";
 import styled from "styled-components";
-import CampoTexto from "../componentes/CampoTexto";
+import CampoTexto from "../componentes/CampoTexto.jsx";
 import { useState } from "react";
-import Botao from "../componentes/Botao";
+import Botao from "../componentes/Botao.jsx";
+import apiAleatorios from "../axios/config.js";
+import { toast } from "react-toastify";
 
 const ContainerCadastro = styled.div`
   display: flex;
@@ -32,18 +34,40 @@ const CadastroUsuario = (props) => {
   const [nome, setNome] = useState("");
   const [cargo, setCargo] = useState("");
   const [cpf, setCpf] = useState("");
-  const [usuario, setUsuario] = useState("");
+  const [nome_usuario, setNome_Usuario] = useState("");
   const [senha, setSenha] = useState("");
 
   const inputSizes = {
     pequeno: { width: "300px", height: "30px", fontSize: "20px" },
     grande: { width: "450px", height: "35px", fontSize: "25px" },
   };
+
+  const cadastrarUsuario = async (e) => {
+    e.preventDefault();
+
+    try {
+      const usarioCadastrado = {
+        nome,
+        cargo,
+        cpf,
+        nome_usuario,
+        senha,
+      };
+      const res = await apiAleatorios.post("api/user", usarioCadastrado);
+      if (res.status === 201) {
+        toast.success(res.data.message);
+        window.location.reload();
+      }
+    } catch (error) {
+      toast.error(error.response.data.error);
+    }
+  };
+
   return (
     <Background>
       <ContainerCadastro>
         <TituloCadastro>CADASTRO DE USUÁRIO</TituloCadastro>
-        <Form>
+        <Form onSubmit={(e) => cadastrarUsuario(e)}>
           <CampoTexto
             size="25px"
             height={inputSizes.pequeno.height}
@@ -85,8 +109,8 @@ const CadastroUsuario = (props) => {
             label="Usuário"
             type="text"
             obrigatorio={true}
-            value={usuario}
-            valorAlterado={(valor) => setUsuario(valor)}
+            value={nome_usuario}
+            valorAlterado={(valor) => setNome_Usuario(valor)}
           />
           <CampoTexto
             height={inputSizes.pequeno.height}

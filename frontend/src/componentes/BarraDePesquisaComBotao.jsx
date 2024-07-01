@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components";
+
 const ContainerInput = styled.div`
   display: flex;
   justify-content: center;
@@ -46,8 +47,11 @@ const BarraDePesquisaComBotao = (props) => {
     <ContainerInput>
       <DivInput divWidth={props.divWidth}>
         <Input inputWidth={props.inputWidth} />
-        <Button butonWidth={props.butonWidth} fontButon={props.fontButon}>
-          {" "}
+        <Button
+          butonWidth={props.butonWidth}
+          fontButon={props.fontButon}
+          onClick={props.onClick}
+        >
           {props.children}
         </Button>
       </DivInput>
